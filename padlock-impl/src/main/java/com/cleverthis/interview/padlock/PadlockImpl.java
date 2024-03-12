@@ -1,6 +1,5 @@
 package com.cleverthis.interview.padlock;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,7 +26,7 @@ import static com.cleverthis.interview.padlock.Utils.ensureSleep;
  * <br/>
  * After create, the input buffer is empty, you have to initialize.
  */
-public class Padlock {
+public class PadlockImpl {
     private final int numpadSize;
     private final Integer[] inputBuffer;
     private final Integer[] correctPasscode;
@@ -37,7 +36,7 @@ public class Padlock {
      *
      * @param numpadSize The number of buttons on the numpad of this lock.
      */
-    public Padlock(int numpadSize) {
+    public PadlockImpl(int numpadSize) {
         if (numpadSize < 1) throw new IllegalArgumentException("numpadSize must be a positive number");
         this.numpadSize = numpadSize;
         this.inputBuffer = new Integer[numpadSize];
