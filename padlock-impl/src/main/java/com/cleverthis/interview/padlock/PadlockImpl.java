@@ -27,6 +27,7 @@ import static com.cleverthis.interview.padlock.Utils.ensureSleep;
  * After create, the input buffer is empty, you have to initialize.
  */
 public class PadlockImpl {
+    private final boolean debug;
     private final int numpadSize;
     private final Integer[] inputBuffer;
     private final Integer[] correctPasscode;
@@ -37,6 +38,17 @@ public class PadlockImpl {
      * @param numpadSize The number of buttons on the numpad of this lock.
      */
     public PadlockImpl(int numpadSize) {
+        this(numpadSize, false);
+    }
+
+    /**
+     * Create a padlock instance.
+     *
+     * @param numpadSize The number of buttons on the numpad of this lock.
+     * @param debug Will skip sleep if is true
+     */
+    PadlockImpl(int numpadSize, boolean debug) {
+        this.debug = debug;
         if (numpadSize < 1) throw new IllegalArgumentException("numpadSize must be a positive number");
         this.numpadSize = numpadSize;
         this.inputBuffer = new Integer[numpadSize];
@@ -59,7 +71,7 @@ public class PadlockImpl {
      * @return The old value, null if not initialized.
      */
     public synchronized Integer writeInputBuffer(int address, int keyIndex) {
-        ensureSleep(1000);
+        if (!debug) ensureSleep(1000);
         if (keyIndex < 0 || keyIndex >= numpadSize)
             throw new IllegalArgumentException(
                     "keyIndex out of range. Keypad size: " + numpadSize + ", keyIndex: " + keyIndex);
