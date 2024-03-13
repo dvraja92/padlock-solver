@@ -11,6 +11,10 @@ repositories {
 
 dependencies {
     implementation(project(":padlock-impl"))
+    // if you ever need import more dependencies, following this format:
+    // implementation("group-id:project-id:version")
+    // just like the logback classic
+    // implementation("ch.qos.logback:logback-classic:1.5.3")
 
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
