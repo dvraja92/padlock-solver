@@ -45,7 +45,7 @@ public class PadlockImpl {
      * Create a padlock instance.
      *
      * @param numpadSize The number of buttons on the numpad of this lock.
-     * @param debug Will skip sleep if is true
+     * @param debug      Will skip sleep if is true
      */
     PadlockImpl(int numpadSize, boolean debug) {
         this.debug = debug;
@@ -55,7 +55,9 @@ public class PadlockImpl {
         List<Integer> answer = new ArrayList<>(numpadSize);
         for (int i = 0; i < numpadSize; i++)
             answer.add(i);
-        Collections.shuffle(answer);
+        for (int i = 0; i < numpadSize / 2; i++) {
+            Collections.shuffle(answer);
+        }
         this.correctPasscode = answer.toArray(new Integer[0]);
     }
 
