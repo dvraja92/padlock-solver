@@ -22,7 +22,7 @@ class PadlockTest {
 
     @Test
     void testInstantiationRest() {
-        PadlockImpl padlock = new PadlockImpl(5, true);
+        PadlockImpl padlock = new PadlockImpl(5);
         for (int i = 0; i < 5; i++) {
             // ensure input buffer is uninitialized
             // should return null when first set
@@ -34,7 +34,7 @@ class PadlockTest {
 
     @Test
     void testRejectInvalidInput() {
-        PadlockImpl padlock = new PadlockImpl(5, true);
+        PadlockImpl padlock = new PadlockImpl(5);
         for (int i = 0; i < 3; i++) {
             padlock.writeInputBuffer(i, i);
         }
@@ -54,7 +54,7 @@ class PadlockTest {
 
     @Test
     void testRejectInvalidInputBufferAddressAndValue() {
-        PadlockImpl padlock = new PadlockImpl(5, true);
+        PadlockImpl padlock = new PadlockImpl(5);
         // test address
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> padlock.writeInputBuffer(-1, 1));
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> padlock.writeInputBuffer(-10, 1));

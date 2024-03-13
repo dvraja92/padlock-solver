@@ -27,4 +27,5 @@ java {
 
 tasks.test {
     useJUnitPlatform()
+    jvmArgs = listOf("-Dfast=true")
 }
