@@ -1,0 +1,9 @@
+image: azul/zulu-openjdk:8-latest
+
+stages:
+  - test
+
+unit-test-padlock-impl:
+  stage: test
+  script:
+    - ./gradlew :padlock-impl:test
