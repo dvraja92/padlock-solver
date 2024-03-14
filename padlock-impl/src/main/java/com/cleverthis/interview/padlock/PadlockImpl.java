@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static com.cleverthis.interview.padlock.Utils.ensureSleep;
 
@@ -31,6 +32,9 @@ public class PadlockImpl {
     private final int numpadSize;
     private final Integer[] inputBuffer;
     private final Integer[] correctPasscode;
+    // performance counter
+    private final AtomicLong writeCounter = new AtomicLong(0);
+    private final AtomicLong checkCounter = new AtomicLong(0);
 
     /**
      * Create a padlock instance.
@@ -66,6 +70,7 @@ public class PadlockImpl {
         if (keyIndex < 0 || keyIndex >= numpadSize)
             throw new IllegalArgumentException(
                     "keyIndex out of range. Keypad size: " + numpadSize + ", keyIndex: " + keyIndex);
+        writeCounter.incrementAndGet();
         Integer oldValue = inputBuffer[address];
         inputBuffer[address] = keyIndex;
         return oldValue;
@@ -87,10 +92,24 @@ public class PadlockImpl {
                     "Passcode invalid: contain duplicated value. " + Arrays.toString(inputBuffer));
             uniqueTestArr[i] = true;
         }
+        checkCounter.incrementAndGet();
         // if no exception, means:
         //     every digit is unique, and every digit is initialized
         // aka this is a valid code
         // now compare with our answer
         return Arrays.equals(correctPasscode, inputBuffer);
+    }
+
+    public long getWriteCounter() {
+        return writeCounter.get();
+    }
+
+    public long getCheckCounter() {
+        return checkCounter.get();
+    }
+
+    public void resetCounter() {
+        writeCounter.set(0);
+        checkCounter.set(0);
     }
 }
