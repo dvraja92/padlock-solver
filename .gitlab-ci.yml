@@ -25,3 +25,6 @@ run-performance-analyze:
     - job: unit-test-all
   script:
     - ./gradlew runPerformanceAnalyze
+    - cat performance.txt
+  artifacts:
+    paths: ['performance.txt']

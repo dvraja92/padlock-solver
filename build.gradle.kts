@@ -1,3 +1,5 @@
+import java.io.FileOutputStream
+
 plugins {
     id("java")
 }
@@ -37,4 +39,5 @@ tasks.named<JavaExec>("runPerformanceAnalyze") {
     classpath = sourceSets.test.get().runtimeClasspath
     mainClass.set("com.cleverthis.interview.PerformanceAnalyze")
     jvmArgs("-Dfast=true")
+    standardOutput = FileOutputStream("performance.txt")
 }
