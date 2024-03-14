@@ -29,3 +29,11 @@ tasks.test {
     useJUnitPlatform()
     jvmArgs = listOf("-Dfast=true")
 }
+
+tasks.register("runPerformanceAnalyze", JavaExec::class.java)
+tasks.named<JavaExec>("runPerformanceAnalyze") {
+    dependsOn("testClasses")
+    group = "verification"
+    classpath = sourceSets.test.get().runtimeClasspath
+    mainClass.set("com.cleverthis.interview.PerformanceAnalyze")
+}
