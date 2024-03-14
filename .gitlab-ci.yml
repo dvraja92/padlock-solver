@@ -2,8 +2,26 @@ image: azul/zulu-openjdk:8-latest
 
 stages:
   - test
+  - analyze
 
+# verify the padlock impl independently
 unit-test-padlock-impl:
   stage: test
   script:
     - ./gradlew :padlock-impl:test
+
+unit-test-all:
+  stage: test
+  script:
+    - ./gradlew test
+  artifacts:
+    when: always
+    reports:
+      junit: build/test-results/test/**/TEST-*.xml
+
+run-performance-analyze:
+  stage: analyze
+  needs:
+    - job: unit-test-all
+  script:
+    - ./gradlew runPerformanceAnalyze

@@ -48,6 +48,26 @@ You should design the proper architectures for your code.
 Last but not least, readability and maintainability are also important.
 Take this project as a show off to your designing and coding skills.
 
+## Build
+
+This repo uses Gradle to build and test.
+There is a unit test boilerplate and a gradle task configured to
+automatically test and evaluate the code when you push your commits.
+
+The `SolutionTestBase` is an abstract class for other tests.
+It tests the correctness of your solution and don't care about the run time.
+See `SolutionTest` for how to use that.
+
+The `PerformanceAnalyze` is not a unit test, but it do analyze roughly how
+fast your solution is. You need to fill in the `solve` method before you run it.
+
+Use `./gradlew test` to run all unit test configured in the project,
+and use `./gradlew runPerformanceTest` to get an analysis.
+
+> Note: You don't have to have a local gradle installation.
+> The `gradlew` script will download one for you.
+> Just install a valid jdk (version >= 8) and very thing should be fine.
+
 ## Still have unclear problems?
 
 Feel free to contact Jeffrey Freeman (jeffrey.freeman@cleverthis.com).

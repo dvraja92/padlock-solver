@@ -7,15 +7,13 @@ import com.cleverthis.interview.padlock.PadlockImpl;
  */
 public class PerformanceAnalyze {
     private static void solve(PadlockImpl padlock) {
-        // TODO
+        new Solution().solve(padlock);
     }
 
-    private static final String RUN_NAME = "Boilerplate";
-    private static final int TOTAL_RUN = 50;
-    private static final int NUMPAD_SIZE = 7;
+    private static final int TOTAL_RUN = 500;
+    private static final int NUMPAD_SIZE = 9;
 
     static {
-        System.out.println("Run name: " + RUN_NAME);
         System.out.println("Total run: " + TOTAL_RUN);
         System.out.println("Numpad size: " + NUMPAD_SIZE);
     }
