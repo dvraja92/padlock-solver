@@ -27,7 +27,7 @@ import static com.cleverthis.interview.padlock.Utils.ensureSleep;
  * <br/>
  * After create, the input buffer is empty, you have to initialize.
  */
-public class PadlockImpl {
+public final class PadlockImpl {
     private final int numpadSize;
     private final Integer[] inputBuffer;
     private final Integer[] correctPasscode;

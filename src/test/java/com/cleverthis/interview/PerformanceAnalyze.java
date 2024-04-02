@@ -40,6 +40,6 @@ public class PerformanceAnalyze {
         double avgWrite = writeSum / (double) TOTAL_RUN;
         System.out.println("Avg run time: " + avgTime + "ms");
         System.out.println("Avg write: " + avgWrite);
-        System.out.println("Calculated estimate avg run time: " + (avgTime / 1000 + avgTime) + "s");
+        System.out.println("Calculated estimate avg run time: " + (avgTime / 1000 + avgWrite) + "s");
     }
 }
