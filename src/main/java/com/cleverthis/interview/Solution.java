@@ -2,8 +2,10 @@ package com.cleverthis.interview;
 
 import com.cleverthis.interview.padlock.PadlockImpl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * This is a placeholder class showing a simple boilerplate.
@@ -11,47 +13,38 @@ import java.util.List;
  */
 public class Solution {
 
+    private int numpadSize;
     private PadlockImpl padlock;
 
-    public void solve(PadlockImpl padlock) {
+    public void solve(PadlockImpl padlock){
+        this.numpadSize = padlock.getNumpadSize();
         this.padlock = padlock;
-        String cracked = crack();
-        if (cracked == null) {
-            throw new RuntimeException("Failed");
+        Integer[] solution = new Integer[numpadSize];
+        Set<Integer> usedDigits = new HashSet<>();
+        if (recurse(0, solution, usedDigits)){
+            System.out.println(Stream.of(solution).map(String::valueOf).collect(Collectors.joining()));
         }
-
-        System.out.println("CRACKED ::::: " + cracked);
     }
 
-    private String crack() {
-        int numpadSize = padlock.getNumpadSize();
-        List<String> permutations = generatePermutations(numpadSize);
-        for (String code : permutations) {
-            for (int i = 0; i < numpadSize; i++) {
-                padlock.writeInputBuffer(i, Integer.parseInt(code.substring(i, i+1)));
-            }
-            if (padlock.isPasscodeCorrect()) {
-                return code;
+
+    private boolean recurse(int position, Integer[] solution, Set<Integer> usedDigits){
+        if (position == numpadSize){
+            return padlock.isPasscodeCorrect();
+        }
+
+        for (int digit = 0; digit < numpadSize; digit++){
+            if (!usedDigits.contains(digit)){
+                padlock.writeInputBuffer(position, digit);
+                solution[position] = digit;
+                usedDigits.add(digit);
+
+                if(recurse(position + 1, solution, usedDigits)){
+                    return true;
+                }
+                usedDigits.remove(digit);
             }
         }
-        return null;
-    }
-
-    private List<String> generatePermutations(int numberOfButtons) {
-        List<String> permutations = new ArrayList<>();
-        permute("", "0123456789".substring(0, numberOfButtons), permutations);
-        return permutations;
-    }
-
-    private void permute(String prefix, String str, List<String> result) {
-        int n = str.length();
-        if (n == 0) {
-            result.add(prefix);
-        } else {
-            for (int i = 0; i < n; i++) {
-                permute(prefix + str.charAt(i), str.substring(0, i) + str.substring(i + 1, n), result);
-            }
-        }
+        return false;
     }
 
 }
