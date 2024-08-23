@@ -1,6 +1,7 @@
 package com.cleverthis.interview;
 
 import com.cleverthis.interview.padlock.PadlockImpl;
+import com.cleverthis.interview.padlock.cracker.ConcretePadlockSolution;
 
 /**
  * This is a placeholder class showing a simple boilerplate.
@@ -8,6 +9,6 @@ import com.cleverthis.interview.padlock.PadlockImpl;
  */
 public class Solution {
     public void solve(PadlockImpl padlock) {
-        throw new RuntimeException("TODO");
+        new ConcretePadlockSolution(padlock).solve();
     }
 }
