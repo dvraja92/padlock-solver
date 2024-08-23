@@ -43,7 +43,7 @@ public abstract class AbstractPadlockSolution {
     }
 
     /**
-     * Recursive method that applies the alogithm
+     * Recursive method that applies the alogithm (refer README.md for the algorithm details)
      * in simple words, it tries to fill all the positions and verifies the passcode.
      * if correct then return else removes last added digit and try with another combination.
      *

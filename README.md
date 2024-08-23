@@ -62,7 +62,7 @@ The `PerformanceAnalyze` is not a unit test, but it do analyze roughly how
 fast your solution is. You need to fill in the `solve` method before you run it.
 
 Use `./gradlew test` to run all unit test configured in the project,
-and use `./gradlew runPerformanceTest` to get an analysis.
+and use `./gradlew runPerformanceAnalyze` to get an analysis.
 
 > Note: You don't have to have a local gradle installation.
 > The `gradlew` script will download one for you.
@@ -71,3 +71,19 @@ and use `./gradlew runPerformanceTest` to get an analysis.
 ## Still have unclear problems?
 
 Feel free to contact Jeffrey Freeman (jeffrey.freeman@cleverthis.com).
+
+
+## Solution Algorithm 
+
+`AbstractPadlockSolution`
+
+* create an array of integer with size equal to numpad size.
+* begin at the first position (i.e., position = 0) in the input buffer.
+* for each position, attempt to place a digit from the set of possible digits (e.g., 0 to numpadSize-1).
+* when all positions are filled, validate passcode.
+* if valid, return true (solutions array has the coorect passcode).
+* if not valid, backtrack (undo and retry).
+  - remove the last added digit and mark as unused.
+  - try the next possible digit at that position.
+  - continue until a valid passcode is found or all permutations have been checked.
+
